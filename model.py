@@ -61,7 +61,7 @@ if torch.cuda.is_available():
     
     _model = pipeline(
         "text-generation",
-        model="meta-llama/Llama-4-Scout-17B-16E-Instruct", 
+        model="deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B", 
         torch_dtype=dtype, 
         device_map="auto",  # Hoặc có thể thử "cpu" nếu không ổn,
         max_new_tokens=256,
@@ -71,7 +71,7 @@ else:
     print("No GPU available, using CPU.")
     _model = pipeline(
         "text-generation",
-        model="meta-llama/Llama-4-Scout-17B-16E-Instruct", 
+        model="deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B", 
         device_map="cpu",
         max_new_tokens=256,
         token = "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"
@@ -185,7 +185,7 @@ class MyModel(AIxBlockMLBase):
                 import threading
                 import os
 
-                model_id = kwargs.get("model_id", "meta-llama/Llama-4-Scout-17B-16E-Instruct")  #"tiiuae/falcon-7b" "bigscience/bloomz-1b7" `zanchat/falcon-1b` `appvoid/llama-3-1b` meta-llama/Llama-4-Scout-17B-16E-Instruct` `mistralai/Mistral-7B-v0.1` `bigscience/bloomz-1b7` `Qwen/Qwen2-1.5B`
+                model_id = kwargs.get("model_id", "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B")  #"tiiuae/falcon-7b" "bigscience/bloomz-1b7" `zanchat/falcon-1b` `appvoid/llama-3-1b` deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B` `mistralai/Mistral-7B-v0.1` `bigscience/bloomz-1b7` `Qwen/Qwen2-1.5B`
                 dataset_id = kwargs.get("dataset_id","timdettmers/openassistant-guanaco") #gingdev/llama_vi_52k kigner/ruozhiba-llama3-tt
 
                 push_to_hub = kwargs.get("push_to_hub", True)
@@ -816,7 +816,7 @@ class MyModel(AIxBlockMLBase):
                 import torch
 
                 prompt = kwargs.get("prompt", None)
-                model_id = kwargs.get("model_id", "meta-llama/Llama-4-Scout-17B-16E-Instruct")
+                model_id = kwargs.get("model_id", "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B")
                 text = kwargs.get("text", None)
                 token_length = kwargs.get("token_lenght", 30)
                 task = kwargs.get("task", "")
@@ -1515,7 +1515,7 @@ class MyModel(AIxBlockMLBase):
     #     import gradio as gr
     #     from transformers import pipeline
     #     task = kwargs.get("task", "text-generation")
-    #     model_id = kwargs.get("model_id", "meta-llama/Llama-4-Scout-17B-16E-Instruct")
+    #     model_id = kwargs.get("model_id", "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B")
     #     world_size = kwargs.get("world_size", 1)
     #     rank = kwargs.get("rank", 0)
     #     master_add = kwargs.get("master_add","127.0.0.1")
@@ -1545,7 +1545,7 @@ class MyModel(AIxBlockMLBase):
 
     #     # Dictionary mapping model names to their Hugging Face Hub identifiers
     #     llama_models = {
-    #         "DeepSeek-R1-Distill-Qwen-1.5B": "meta-llama/Llama-4-Scout-17B-16E-Instruct",
+    #         "DeepSeek-R1-Distill-Qwen-1.5B": "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B",
     #         "DeepSeek-R1-Distill-Qwen-7B": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
     #         "DeepSeek-R1-Distill-Llama-8B": "deepseek-ai/DeepSeek-R1-Distill-Llama-8B",
     #         "DeepSeek-R1-Distill-Qwen-14B": "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B",
@@ -1871,9 +1871,9 @@ class MyModel(AIxBlockMLBase):
         import gradio as gr
         from transformers import pipeline
         task = kwargs.get("task", "text-generation")
-        model_id = kwargs.get("model_id", "meta-llama/Llama-4-Scout-17B-16E-Instruct")
-        if "deepseek" not in "meta-llama/Llama-4-Scout-17B-16E-Instruct":
-             model_id =  "meta-llama/Llama-4-Scout-17B-16E-Instruct"
+        model_id = kwargs.get("model_id", "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B")
+        if "deepseek" not in "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B":
+             model_id =  "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B"
         project_id = kwargs.get("project_id", 0)
 
         print(f'''\
