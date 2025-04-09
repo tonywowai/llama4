@@ -1,5 +1,5 @@
 #model_marketplace.config
-# {"token_length": "4018", "accuracy": "70", "precision": "fp16", "sampling_frequency:": "44100", "mono": true, "fps": "74", "resolution": "480", "image_width": "1080", "image_height": "1920", "framework": "transformers", "dataset_format": "llm", "dataset_sample": "[id on s3]", "weights": [{"name": "meta-llama/Llama-4-Scout-17B-16E-Instruct", "value": "meta-llama/Llama-4-Scout-17B-16E-Instruct", "size": 260, "paramasters": "12B", "tflops": 12, "vram": 12, "nodes": 1}], "cuda": "11.4", "task": ["chatbot", "chat", "text-generation", "text-classification", "text-summarization", "text-ner", "question-answering"]}
+# {"token_length": "4018", "accuracy": "70", "precision": "fp16", "sampling_frequency:": "44100", "mono": true, "fps": "74", "resolution": "480", "image_width": "1080", "image_height": "1920", "framework": "transformers", "dataset_format": "llm", "dataset_sample": "[id on s3]", "weights": [{"name": "deepseek-ai/DeepSeek-R1", "value": "deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B", "size": 260, "paramasters": "12B", "tflops": 12, "vram": 12, "nodes": 1}], "cuda": "11.4", "task": ["chatbot", "chat", "text-generation", "text-classification", "text-summarization", "text-ner", "question-answering"]}
 
 # import math
 # import pathlib
