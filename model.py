@@ -256,7 +256,7 @@ class MyModel(AIxBlockMLBase):
                     # from misc import get_device_counts
                     import os
                     dataset_path = None
-                    project = connecet_project(host_name, token, project_id)
+                    project = connect_project(host_name, token, project_id)
 
                     if dataset_version and dataset_id:
                         dataset_path = os.path.join(clone_dir, f"datasets/{dataset_version}")
