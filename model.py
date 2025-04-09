@@ -1737,10 +1737,10 @@ class MyModel(AIxBlockMLBase):
         from transformers import pipeline
         task = kwargs.get("task", "text-generation")
         model_id = kwargs.get("model_id", "meta-llama/Llama-4-Scout-17B-16E-Instruct")
-        project_id = project
+        # project_id = project
 
         print(f'''\
-        Project ID: {project_id}
+     
         Label config: {self.label_config}
         Parsed JSON Label config: {self.parsed_label_config}''')
         from huggingface_hub import login
@@ -1816,7 +1816,7 @@ class MyModel(AIxBlockMLBase):
         # load_model(task,model_id,project_id)
 
         def generate_response(input_text, temperature, top_p, top_k, max_new_token):
-            load_model("text-generation", model_id, project_id, temperature, top_p, top_k, max_new_token)
+            load_model("text-generation", model_id, 0, temperature, top_p, top_k, max_new_token)
             # _model = load_model(model_id)
             # prompt_text = f"""
             #        Here is the context: 
@@ -1853,14 +1853,14 @@ class MyModel(AIxBlockMLBase):
             return generated_text
 
         def summarization_response(input_text, temperature, top_p, top_k, max_new_token):
-            load_model("text-generation", model_id, project_id, temperature, top_p, top_k, max_new_token)
+            load_model("text-generation", model_id, 0, temperature, top_p, top_k, max_new_token)
             # _model = load_model(model_id)
             generated_text = text_summarization(_model, input_text)
 
             return generated_text
 
         def text_classification_response(input_text,categories_text, temperature, top_p, top_k, max_new_token):
-            load_model("text-generation", model_id, project_id, temperature, top_p, top_k, max_new_token)
+            load_model("text-generation", model_id, 0, temperature, top_p, top_k, max_new_token)
             # prompt_text = f"""
             #         Summarize the following text into a single, concise paragraph focusing on the key ideas and important points:
 
@@ -1875,7 +1875,7 @@ class MyModel(AIxBlockMLBase):
             return generated_text
 
         def question_answering_response(context_textbox,question_textbox, temperature, top_p, top_k, max_new_token):
-            load_model("text-generation", model_id, project_id, temperature, top_p, top_k, max_new_token)
+            load_model("text-generation", model_id, 0, temperature, top_p, top_k, max_new_token)
             # _model = load_model(model_id)
             if input_text and question_textbox:
                 generated_text = qa_with_context(_model, context_textbox, question_textbox)
@@ -1887,7 +1887,7 @@ class MyModel(AIxBlockMLBase):
             return generated_text
 
         def chatbot_continuous_chat(history, user_input, temperature, top_p, top_k, max_new_token):
-            load_model("text-generation", model_id, project_id, temperature, top_p, top_k, max_new_token)
+            load_model("text-generation", model_id, 0, temperature, top_p, top_k, max_new_token)
             generated_text = chatbot_with_history(_model, history, user_input)
             return generated_text
 
@@ -2182,7 +2182,7 @@ class MyModel(AIxBlockMLBase):
             #     replacement = f"<span style='border: 2px solid green;'>{entity_text}</span>"
             #     highlighted_text = highlighted_text.replace(entity_text, replacement)
             # return highlighted_text
-            load_model("text-generation", model_id, project_id, temperature, top_p, top_k, max_new_token)
+            load_model("text-generation", model_id, 0, temperature, top_p, top_k, max_new_token)
             generated_text = text_ner(_model, input_text, categories_text)
             return generated_text
 
