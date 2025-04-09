@@ -213,12 +213,11 @@ class MyModel(AIxBlockMLBase):
         print(f'New model version: {self.get("model_version")}')
 
         print('fit() completed successfully.')
-    def action(self, project, command, collection, **kwargs):
+    def action(self, command, **kwargs):
 
         print(f"""
-              project: {project},
+         
                 command: {command},
-                collection: {collection},
               """)
         if command.lower() == "train":
                 import threading
@@ -1732,7 +1731,7 @@ class MyModel(AIxBlockMLBase):
 
             # return {"message": "train completed successfully"}
 
-    def model(self, project, **kwargs):
+    def model(self,  **kwargs):
 
         import gradio as gr
         from transformers import pipeline
