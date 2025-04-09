@@ -25,7 +25,7 @@ huggingface_hub
 accelerate>=0.31.0
 prometheus-client
 aixblock-ml
-aixblock-sdk
+aixblock-sdk==0.0.5
 aixblock-tools
 tensorboardX
 # ==1.9
