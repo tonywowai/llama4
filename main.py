@@ -26,7 +26,7 @@ def get_kwargs_from_config(config_path=_DEFAULT_CONFIG_PATH):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='AIxBlock')
     parser.add_argument(
-        '-p', '--port', dest='port', type=int, default=9090,
+        '-p', '--port', dest='port', type=int, default=1002,
         help='Server port')
     parser.add_argument(
         '--host', dest='host', type=str, default='0.0.0.0',
