@@ -82,3 +82,4 @@ rich
 # vllm
 # auto-round
 # # intel_extension_for_pytorch==2.5.0
+huggingface_hub[hf_xet]
