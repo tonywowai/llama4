@@ -1192,8 +1192,8 @@ class MyModel(AIxBlockMLBase):
         # task = kwargs.get("task", "text-generation")
         task = kwargs.get("task", "chat")
         model_id = kwargs.get("model_id", "meta-llama/Llama-4-Scout-17B-16E-Instruct")
-        if "deepseek" not in "meta-llama/Llama-4-Scout-17B-16E-Instruct":
-             model_id =  "meta-llama/Llama-4-Scout-17B-16E-Instruct"
+        # if "deepseek" not in "meta-llama/Llama-4-Scout-17B-16E-Instruct":
+        #      model_id =  "meta-llama/Llama-4-Scout-17B-16E-Instruct"
         project_id = kwargs.get("project_id", 0)
 
         print(f'''\
