@@ -1,8 +1,10 @@
-from fastapi import FastAPI, HTTPException, Response
+from fastapi import FastAPI, HTTPException, Response, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, RedirectResponse
 from typing import Dict, Any, Optional
-from model import MyModel
+from model import MyModel, mcp
+from mcp.server.sse import SseServerTransport
+from starlette.routing import Mount
 import os
 from pydantic import BaseModel
 
@@ -45,9 +47,9 @@ JOB_INTERVAL = int(os.getenv("JOB_INTERVAL", 60))
 model = MyModel()
 
 @app.post("/action")
-async def action(project: str, command: str, collection: str, data: Optional[Dict[str, Any]] = None):
+async def action(command: str, data: Optional[Dict[str, Any]] = None):
     try:
-        result = model.action(project, command, collection, **(data or {}))
+        result = model.action(command, **(data or {}))
         return result
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -100,6 +102,34 @@ async def download_file(path: str):
     return FileResponse(full_path, filename=os.path.basename(full_path))
 
 
+sse = SseServerTransport("/messages/")
+
+app.router.routes.append(Mount("/messages", app=sse.handle_post_message))
+
+# Add documentation for the /messages endpoint
+@app.get("/messages", tags=["MCP"], include_in_schema=True)
+def messages_docs():
+    pass
+
+@app.get("/sse", tags=["MCP"])
+async def handle_sse(request: Request):
+    """
+    SSE endpoint that connects to the MCP server
+
+    This endpoint establishes a Server-Sent Events connection with the client
+    and forwards communication to the Model Context Protocol server.
+    """
+    # Use sse.connect_sse to establish an SSE connection with the MCP server
+    async with sse.connect_sse(request.scope, request.receive, request._send) as (
+        read_stream,
+        write_stream,
+    ):
+        # Run the MCP server with the established streams
+        await mcp._mcp_server.run(
+            read_stream,
+            write_stream,
+            mcp._mcp_server.create_initialization_options(),
+        )
 # @app.on_event("shutdown")
 # async def shutdown_event():
 #     scheduler.shutdown()
@@ -110,6 +140,7 @@ if __name__ == "__main__":
     import socket 
  
     def find_available_port(start_port=8000, max_port=9000): 
+        
         for port in range(start_port, max_port + 1): 
             try: 
                 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s: 
